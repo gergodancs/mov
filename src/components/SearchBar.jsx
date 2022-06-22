@@ -6,12 +6,8 @@ import MoviesCtx from "../store/movies-context";
 const SearchBar = () => {
   const ctx = useContext(MoviesCtx);
 
-  const submitForm = (e) => {
-    e.preventDefault();
-  };
-
   return (
-    <form onSubmit={submitForm}>
+    <form>
       <label htmlFor="search">Search Movies: </label>
       <input
         value={ctx.searchText}
