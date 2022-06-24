@@ -4,9 +4,8 @@ import { QueryClientProvider, QueryClient } from "react-query";
 
 import Movies from "./components/Movies";
 
-const queryClient = new QueryClient();
-
 function App() {
+  const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Layout>
