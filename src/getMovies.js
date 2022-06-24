@@ -1,9 +1,6 @@
 import { useQuery } from "react-query";
 
 export const fetchMoviesHandler = async (searchText) => {
-  if (searchText === "" || searchText.length < 3) {
-    return;
-  }
   const movies_query = `{
         searchMovies(query: "${searchText}") {
           id
