@@ -1,24 +1,9 @@
 import React from "react";
-import { useState } from "react";
+
 import { Link } from "react-router-dom";
-import { useQuery } from "react-query";
-import { fetchMoviesHandler } from "../getMovies";
-const SearchBar = () => {
-  const [searchText, setSearchText] = useState("");
 
-  const { isLoading, isError, data } = useQuery(["movies", searchText], () =>
-    fetchMoviesHandler(searchText)
-  );
-  if (isLoading === "loading" && searchText.length > 3) {
-    return <div>Loading...</div>;
-  }
-  if (isError === "error") {
-    return <div>Error..</div>;
-  }
-
-  const isLoadingData =
-    isLoading === "loading" || (searchText.length > 2 && !data);
-  console.log(data);
+const SearchBar = (props) => {
+  const { searchText, setSearchText, setStartFetch } = props;
 
   return (
     <form>
@@ -29,10 +14,9 @@ const SearchBar = () => {
         type="text"
         id="search"
       />
-      <button>
+      <button onClick={() => setStartFetch((prevState) => !prevState)}>
         <Link to="/movies">Get Movies</Link>
       </button>
-      {isLoadingData && <div>Loading...</div>}
     </form>
   );
 };

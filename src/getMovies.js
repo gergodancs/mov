@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-export const fetchMoviesHandler = async (searchText) => {
+const fetchMoviesHandler = async (searchText, startFetch) => {
   const movies_query = `{
         searchMovies(query: "${searchText}") {
           id
@@ -23,7 +23,7 @@ export const fetchMoviesHandler = async (searchText) => {
           
         }
       }`;
-
+  if (!searchText || (searchText.length < 3 && !startFetch)) return;
   const response = await fetch("https://tmdb.sandbox.zoosh.ie/dev/grphql/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -34,5 +34,5 @@ export const fetchMoviesHandler = async (searchText) => {
 };
 
 export const useMoviesQuery = (searchText) => {
-  useQuery(["movies", searchText], () => fetchMoviesHandler(searchText));
+  return useQuery(["movies", searchText], () => fetchMoviesHandler(searchText));
 };
