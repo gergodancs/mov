@@ -1,18 +1,35 @@
 import React from "react";
 import { useMoviesQuery } from "../getMovies";
+import { Link } from "react-router-dom";
 
 const Movies = (props) => {
-  const { searchText, startFetch } = props;
-  const { data, isFetching, isLoading } = useMoviesQuery(
+  const { searchText, startFetch, setMovieId } = props;
+  const { data, isFetching, isError, error } = useMoviesQuery(
     searchText,
     startFetch
   );
 
-  if (isFetching) return console.log("fetching");
-  if (isLoading) return console.log("loading");
-  if (data) return console.log(data);
+  if (isFetching) return <div>Loading...</div>;
+  if (isError)
+    return (
+      <div>
+        Error: <p>{error}</p>
+      </div>
+    );
 
-  return <div>Movies</div>;
+  return (
+    <div>
+      <ul>
+        {data.data.searchMovies.map((movie) => {
+          return (
+            <Link id={movie.id} key={movie.id} to={`/movies/${movie.name}`}>
+              <li onClick={() => setMovieId(movie.id)}>{movie.name}</li>
+            </Link>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
 
 export default Movies;
