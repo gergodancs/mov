@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Movies = (props) => {
   const { searchText, startFetch, setMovieId } = props;
+
   const { data, isFetching, isError, error } = useMoviesQuery(
     searchText,
     startFetch
@@ -27,7 +28,12 @@ const Movies = (props) => {
               key={movie.id}
               to={`/movies/${movie.name}/${movie.id}`}
             >
-              <li onClick={() => setMovieId(movie.id)}>{movie.name}</li>
+              <li
+                className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 m-10"
+                onClick={() => setMovieId(movie.id)}
+              >
+                {movie.name}
+              </li>
             </Link>
           );
         })}

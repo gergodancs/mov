@@ -30,7 +30,7 @@ const Movie = (props) => {
   });
 
   return (
-    <div>
+    <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 m-10">
       <h3>{movie[0].name}</h3>
     </div>
   );
