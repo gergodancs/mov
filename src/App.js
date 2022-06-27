@@ -30,7 +30,7 @@ function App() {
             }
           />
           <Route
-            path="/movies/:movieId"
+            path="/movies/:movieName/:movieId"
             element={
               <Movie
                 searchText={searchText}

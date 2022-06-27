@@ -22,7 +22,11 @@ const Movies = (props) => {
       <ul>
         {data.data.searchMovies.map((movie) => {
           return (
-            <Link id={movie.id} key={movie.id} to={`/movies/${movie.name}`}>
+            <Link
+              id={movie.id}
+              key={movie.id}
+              to={`/movies/${movie.name}/${movie.id}`}
+            >
               <li onClick={() => setMovieId(movie.id)}>{movie.name}</li>
             </Link>
           );

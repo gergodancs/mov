@@ -6,8 +6,14 @@ const Movie = (props) => {
   const params = useParams();
   const { searchText, startFetch, movieId } = props;
 
+  const paramsSearch = params.movieName;
+
+  const paramsId = params.movieId;
+
+  const dynamicSearchText = searchText ? searchText : paramsSearch;
+
   const { data, isFetching, isError, error } = useMoviesQuery(
-    searchText,
+    dynamicSearchText,
     startFetch
   );
 
@@ -18,13 +24,10 @@ const Movie = (props) => {
         Error: <p>{error}</p>
       </div>
     );
-  console.log(movieId);
 
   const movie = data.data.searchMovies.filter((movie) => {
-    return movie.id === movieId;
+    return movie.id === movieId ? movieId : paramsId;
   });
-
-  console.log("ez", movie);
 
   return (
     <div>
