@@ -1,14 +1,13 @@
 import React from "react";
 import { useMoviesQuery } from "../getMovies";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Movies = (props) => {
-  const { searchText, startFetch, setMovieId } = props;
+  const { searchText, setMovieId } = props;
 
-  const { data, isFetching, isError, error } = useMoviesQuery(
-    searchText,
-    startFetch
-  );
+  let navigate = useNavigate();
+
+  const { data, isFetching, isError, error } = useMoviesQuery(searchText);
 
   if (isFetching) return <div>Loading...</div>;
   if (isError)
@@ -17,24 +16,23 @@ const Movies = (props) => {
         Error: <p>{error}</p>
       </div>
     );
-
+  const handleClick = (id) => {
+    setMovieId(id);
+    navigate(`/movie?title=${searchText}&?id=${id}`);
+  };
   return (
     <div>
       <ul>
         {data.data.searchMovies.map((movie) => {
           return (
-            <Link
+            <li
               id={movie.id}
               key={movie.id}
-              to={`/movies/${movie.name}/${movie.id}`}
+              className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 m-10"
+              onClick={() => handleClick(movie.id)}
             >
-              <li
-                className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 m-10"
-                onClick={() => setMovieId(movie.id)}
-              >
-                {movie.name}
-              </li>
-            </Link>
+              {movie.name}
+            </li>
           );
         })}
       </ul>

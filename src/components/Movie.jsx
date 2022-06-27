@@ -1,21 +1,24 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useMoviesQuery } from "../getMovies";
 
 const Movie = (props) => {
-  const params = useParams();
-  const { searchText, startFetch, movieId } = props;
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  console.log(location);
+  const title = queryParams.get("title");
+  const id = queryParams.get("id");
+  console.log(id);
 
-  const paramsSearch = params.movieName;
+  const { searchText, movieId } = props;
 
-  const paramsId = params.movieId;
+  // const paramsSearch = params.movieName;
 
-  const dynamicSearchText = searchText ? searchText : paramsSearch;
+  // const paramsId = params.movieId;
 
-  const { data, isFetching, isError, error } = useMoviesQuery(
-    dynamicSearchText,
-    startFetch
-  );
+  //const dynamicSearchText = searchText;
+
+  const { data, isFetching, isError, error } = useMoviesQuery(title);
 
   if (isFetching) return <div>Loading...</div>;
   if (isError)
@@ -26,7 +29,7 @@ const Movie = (props) => {
     );
 
   const movie = data.data.searchMovies.filter((movie) => {
-    return movie.id === movieId ? movieId : paramsId;
+    return movie.id === id;
   });
 
   return (

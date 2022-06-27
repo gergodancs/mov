@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SearchBar = (props) => {
-  const { searchText, setSearchText, setStartFetch } = props;
+  const { searchText, setSearchText } = props;
 
   return (
     <form className="w-full flex justify-center py-10 bg-slate-400">
@@ -15,10 +15,7 @@ const SearchBar = (props) => {
         type="text"
         id="search"
       />
-      <button
-        className="w-sm bg-gray-300 px-10 rounded-lg shadow-sm"
-        onClick={() => setStartFetch((prevState) => !prevState)}
-      >
+      <button className="w-sm bg-gray-300 px-10 rounded-lg shadow-sm">
         <Link to="/movies">Get Movies</Link>
       </button>
     </form>

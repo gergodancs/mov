@@ -1,4 +1,5 @@
 import React from "react";
+
 import SearchBar from "./SearchBar";
 
 const Layout = (props) => {
@@ -10,6 +11,7 @@ const Layout = (props) => {
         setSearchText={setSearchText}
         setStartFetch={setStartFetch}
       />
+
       <main>{props.children}</main>
     </div>
   );

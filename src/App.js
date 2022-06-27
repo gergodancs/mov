@@ -1,5 +1,5 @@
 import Layout from "./components/Layout";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { useState } from "react";
 
@@ -9,35 +9,20 @@ const queryClient = new QueryClient();
 
 function App() {
   const [searchText, setSearchText] = useState("");
-  const [startFetch, setStartFetch] = useState(false);
+
   const [movieId, setMovieId] = useState(null);
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout
-        searchText={searchText}
-        setSearchText={setSearchText}
-        setStartFetch={setStartFetch}
-      >
+      <Layout searchText={searchText} setSearchText={setSearchText}>
         <Routes>
+          <Route path="/" element={<Outlet />} />
           <Route
             path="/movies"
-            element={
-              <Movies
-                searchText={searchText}
-                startFetch={startFetch}
-                setMovieId={setMovieId}
-              />
-            }
+            element={<Movies searchText={searchText} setMovieId={setMovieId} />}
           />
           <Route
-            path="/movies/:movieName/:movieId"
-            element={
-              <Movie
-                searchText={searchText}
-                startFetch={startFetch}
-                movieId={movieId}
-              />
-            }
+            path="/movie"
+            element={<Movie searchText={searchText} movieId={movieId} />}
           />
         </Routes>
       </Layout>

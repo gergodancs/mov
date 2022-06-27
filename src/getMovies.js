@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-const fetchMoviesHandler = async (searchText, startFetch) => {
+const fetchMoviesHandler = async (searchText) => {
   const movies_query = `{
         searchMovies(query: "${searchText}") {
           id
@@ -23,7 +23,7 @@ const fetchMoviesHandler = async (searchText, startFetch) => {
           
         }
       }`;
-  if (!searchText || (searchText.length < 3 && !startFetch)) return;
+  if (!searchText || searchText.length < 3) return;
   const response = await fetch("https://tmdb.sandbox.zoosh.ie/dev/grphql/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
