@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 const Layout = (props) => {
   const { searchText, setSearchText, setStartFetch } = props;
   return (
-    <div className="container">
+    <div className="w-full">
       <SearchBar
         searchText={searchText}
         setSearchText={setSearchText}
