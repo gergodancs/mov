@@ -18,12 +18,13 @@ const Movies = (props) => {
     );
   const handleClick = (id) => {
     setMovieId(id);
-    navigate(`/movie?title=${searchText}&?id=${id}`);
+    //navigate(`/movie?title=${searchText}&?id=${id}`);
+    navigate(`/movie/${id}?title=${searchText}`);
   };
   return (
     <div>
       <ul>
-        {data.data.searchMovies.map((movie) => {
+        {data?.data?.searchMovies?.map((movie) => {
           return (
             <li
               id={movie.id}

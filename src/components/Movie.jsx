@@ -2,21 +2,13 @@ import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useMoviesQuery } from "../getMovies";
 
-const Movie = (props) => {
+const Movie = () => {
   const location = useLocation();
+  const params = useParams();
   const queryParams = new URLSearchParams(location.search);
-  console.log(location);
+
   const title = queryParams.get("title");
-  const id = queryParams.get("id");
-  console.log(id);
-
-  const { searchText, movieId } = props;
-
-  // const paramsSearch = params.movieName;
-
-  // const paramsId = params.movieId;
-
-  //const dynamicSearchText = searchText;
+  const paramsId = params.id;
 
   const { data, isFetching, isError, error } = useMoviesQuery(title);
 
@@ -28,13 +20,13 @@ const Movie = (props) => {
       </div>
     );
 
-  const movie = data.data.searchMovies.filter((movie) => {
-    return movie.id === id;
+  const movie = data?.data?.searchMovies?.filter((movie) => {
+    return movie.id === paramsId;
   });
 
   return (
     <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 m-10">
-      <h3>{movie[0].name}</h3>
+      <h3>{movie[0]?.name}</h3>
     </div>
   );
 };

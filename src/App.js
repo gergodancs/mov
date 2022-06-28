@@ -20,10 +20,7 @@ function App() {
             path="/movies"
             element={<Movies searchText={searchText} setMovieId={setMovieId} />}
           />
-          <Route
-            path="/movie"
-            element={<Movie searchText={searchText} movieId={movieId} />}
-          />
+          <Route path="/movie/:id" element={<Movie />} />
         </Routes>
       </Layout>
     </QueryClientProvider>
