@@ -1,26 +1,28 @@
 import React from "react";
 import { useMoviesQuery } from "../getMovies";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Movies = (props) => {
-  const { searchText, setMovieId } = props;
+const Movies = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const title = queryParams.get("title");
 
   let navigate = useNavigate();
 
-  const { data, isFetching, isError, error } = useMoviesQuery(searchText);
+  const { data, isLoading, isError, error } = useMoviesQuery(title);
 
-  if (isFetching) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
   if (isError)
     return (
       <div>
         Error: <p>{error}</p>
       </div>
     );
-  const handleClick = (id) => {
-    setMovieId(id);
-    //navigate(`/movie?title=${searchText}&?id=${id}`);
-    navigate(`/movie/${id}?title=${searchText}`);
+  const getMovieDetails = (id) => {
+    navigate(`/movie/${id}?title=${title}`);
   };
+
   return (
     <div>
       <ul>
@@ -29,8 +31,8 @@ const Movies = (props) => {
             <li
               id={movie.id}
               key={movie.id}
-              className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 m-10"
-              onClick={() => handleClick(movie.id)}
+              className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 mb-10"
+              onClick={() => getMovieDetails(movie.id)}
             >
               {movie.name}
             </li>

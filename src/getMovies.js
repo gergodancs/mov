@@ -23,7 +23,7 @@ const fetchMoviesHandler = async (searchText) => {
           
         }
       }`;
-  if (!searchText || searchText.length < 3) return;
+
   const response = await fetch("https://tmdb.sandbox.zoosh.ie/dev/grphql/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
