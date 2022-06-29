@@ -1,25 +1,25 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 const SearchBar = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const showMoviesList = (e) => {
     e.preventDefault();
-    setSearchParams({ title: searchText });
-    const title = searchParams.get("title");
-    console.log(searchParams);
 
-    if (!title || title.trim().length < 2) {
+    if (!searchText || searchText.trim().length < 2) {
       return alert("type at least two characters");
     }
-    navigate(`/movies?${searchParams}`);
-
-    console.log(title);
+    navigate({
+      pathname: "movies",
+      search: createSearchParams({
+        title: searchText,
+      }).toString(),
+    });
   };
+
   return (
     <form
       onSubmit={showMoviesList}

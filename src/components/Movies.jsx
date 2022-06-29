@@ -1,6 +1,6 @@
 import React from "react";
 import { useMoviesQuery } from "../getMovies";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, createSearchParams } from "react-router-dom";
 
 const Movies = () => {
   const location = useLocation();
@@ -20,6 +20,12 @@ const Movies = () => {
       </div>
     );
   const getMovieDetails = (id) => {
+    navigate({
+      pathname: `movies/${id}`,
+      search: createSearchParams({
+        title: title,
+      }).toString(),
+    });
     navigate(`/movie/${id}?title=${title}`);
   };
 
