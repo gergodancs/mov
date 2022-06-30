@@ -1,6 +1,11 @@
 import React from "react";
 import { useMoviesQuery } from "../getMovies";
-import { useNavigate, useLocation, createSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  useLocation,
+  createSearchParams,
+  useSearchParams,
+} from "react-router-dom";
 
 const Movies = () => {
   const location = useLocation();

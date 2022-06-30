@@ -23,11 +23,16 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={showMoviesList}
-      className="w-full flex justify-center py-10 bg-slate-400"
+      className="mx-auto max-w-screen-xl  lg:flex justify-center  p-10 bg-slate-400 "
     >
-      <label htmlFor="search">Search Movies: </label>
+      <label
+        className="font-bold tracking-[0.2em] text-gray-100 sm:text-s lg:text-2xl "
+        htmlFor="search"
+      >
+        Search Movies:
+      </label>
       <input
-        className="w-sm ml-5 mr-5 border border-gray-300 rounded-lg"
+        className="lg:w-[50%] px-5 focus:outline-none   border border-gray-300 rounded-lg"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         type="text"
