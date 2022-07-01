@@ -18,29 +18,28 @@ const SearchBar = () => {
         title: searchText,
       }).toString(),
     });
+    setSearchText("");
   };
 
   return (
     <form
       onSubmit={showMoviesList}
-      className=" flex flex-col gap-2 md:flex-row mx-auto  p-10 bg-slate-400 "
+      className=" flex flex-col justify-center gap-2  mx-auto  p-10 bg-slate-400 "
     >
-      <label
-        className="font-bold tracking-[0.2em] text-gray-100 sm:text-s lg:text-2xl "
-        htmlFor="search"
-      >
-        Search Movies:
-      </label>
-      <input
-        className="md:w-[50%] px-5 focus:outline-none   border border-gray-300 rounded-lg"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        type="text"
-        id="search"
-      />
-      <button className="w-sm bg-gray-300 px-10 rounded-lg shadow-sm">
-        Get Movies
-      </button>
+      <h1 className="text-center font-bold text-3xl tracking-widest">MOVIES</h1>
+      <div className="flex w-full justify-center gap-2 h-10">
+        <input
+          className="md:w-[50%] px-5 focus:outline-none   border border-gray-300 rounded-lg"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          type="text"
+          id="search"
+          placeholder="Type a movie title:"
+        />
+        <button className="w-sm bg-gray-300 px-10 rounded-lg shadow-sm">
+          Get Movies
+        </button>
+      </div>
     </form>
   );
 };
