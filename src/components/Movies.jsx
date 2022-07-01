@@ -1,4 +1,5 @@
 import React from "react";
+import MovieCard from "./MovieCard";
 import { useMoviesQuery } from "../getMovies";
 import {
   useNavigate,
@@ -21,7 +22,7 @@ const Movies = () => {
         Error: <p>{error}</p>
       </div>
     );
-  const getMovieDetails = (id) => {
+  const getMovieDetails = (id, name) => {
     navigate({
       pathname: `/movie/${id}`,
       search: createSearchParams({
@@ -35,25 +36,14 @@ const Movies = () => {
       <ul>
         {data?.data?.searchMovies?.map((movie) => {
           return (
-            <li
+            <MovieCard
               id={movie.id}
               key={movie.id}
-              className="p-6 max-w-[90%] md:max-w-[70%] mx-auto bg-slate-100 rounded-xl shadow-md flex flex-col items-center md:flex-row space-x-4 mt-10 cursor-pointer hover:scale-[0.98] duration-200"
-              onClick={() => getMovieDetails(movie.id)}
-            >
-              <div className="flex flex-col gap-3 ">
-                <h1 className="text-center font-bold text-2xl   hover:text-[#333] ">
-                  {movie.name}
-                </h1>
-                <span>{movie.overview}</span>
-              </div>
-
-              <img
-                className="max-h-[250px]"
-                src={movie.poster?.medium}
-                alt=""
-              />
-            </li>
+              title={movie.name}
+              overview={movie.overview}
+              imgUrl={movie.poster?.medium}
+              getMovieDetails={getMovieDetails}
+            />
           );
         })}
       </ul>
