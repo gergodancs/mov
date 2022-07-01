@@ -23,7 +23,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={showMoviesList}
-      className="mx-auto max-w-screen-xl  lg:flex justify-center  p-10 bg-slate-400 "
+      className=" flex flex-col gap-2 md:flex-row mx-auto  p-10 bg-slate-400 "
     >
       <label
         className="font-bold tracking-[0.2em] text-gray-100 sm:text-s lg:text-2xl "
@@ -32,7 +32,7 @@ const SearchBar = () => {
         Search Movies:
       </label>
       <input
-        className="lg:w-[50%] px-5 focus:outline-none   border border-gray-300 rounded-lg"
+        className="md:w-[50%] px-5 focus:outline-none   border border-gray-300 rounded-lg"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         type="text"

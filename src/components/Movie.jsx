@@ -1,13 +1,12 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useMoviesQuery } from "../getMovies";
 
 const Movie = () => {
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const params = useParams();
-  const queryParams = new URLSearchParams(location.search);
 
-  const title = queryParams.get("title");
+  const title = searchParams.get("title");
   const paramsId = params.id;
 
   const { data, isFetching, isError, error } = useMoviesQuery(title);

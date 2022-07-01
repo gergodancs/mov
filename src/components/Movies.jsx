@@ -2,18 +2,15 @@ import React from "react";
 import { useMoviesQuery } from "../getMovies";
 import {
   useNavigate,
-  useLocation,
   createSearchParams,
   useSearchParams,
 } from "react-router-dom";
 
 const Movies = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
+  const navigate = useNavigate();
 
-  const title = queryParams.get("title");
-
-  let navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const title = searchParams.get("title");
 
   const { data, isLoading, isError, error } = useMoviesQuery(title);
 
@@ -26,12 +23,11 @@ const Movies = () => {
     );
   const getMovieDetails = (id) => {
     navigate({
-      pathname: `movies/${id}`,
+      pathname: `/movie/${id}`,
       search: createSearchParams({
         title: title,
       }).toString(),
     });
-    navigate(`/movie/${id}?title=${title}`);
   };
 
   return (
@@ -42,7 +38,7 @@ const Movies = () => {
             <li
               id={movie.id}
               key={movie.id}
-              className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 mb-10"
+              className="p-6 max-w-[90%] md:max-w-[70%] mx-auto bg-slate-100 rounded-xl shadow-md flex items-center space-x-4 mt-10"
               onClick={() => getMovieDetails(movie.id)}
             >
               {movie.name}
